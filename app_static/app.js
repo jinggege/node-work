@@ -5,8 +5,9 @@
  global.RootPath = __dirname;
 
 var http = require("http");
-var route = require(".src/control/route.js");
+var route = require("./src/control/route.js");
 
+route.init();
 
 var app = http.createServer(route.onRequest);
 
