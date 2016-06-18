@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/jinggege/node-work/issues"
   },
-  "homepage": "https://github.com/jinggege/node-work#readme"
+  "homepage": "https://github.com/jinggege/node-work#readme",
+  "dependencies": {
+    "koa": "^1.2.0"
+  }
 }
