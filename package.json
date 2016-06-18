@@ -1,0 +1,23 @@
+{
+  "name": "majing",
+  "version": "1.0.0",
+  "description": "some work",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jinggege/node-work.git"
+  },
+  "keywords": [
+    "node",
+    "component"
+  ],
+  "author": "jgg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jinggege/node-work/issues"
+  },
+  "homepage": "https://github.com/jinggege/node-work#readme"
+}
