@@ -9,7 +9,6 @@ var path = require("path");
 var mime = require(global.RootPath+"/src/config/mime.js").types;
 
 var Route = function(){};
-var routeCatch = {};
 
 Route.prototype = {
     onRequest:function(request,response){
@@ -17,10 +16,8 @@ Route.prototype = {
         var realpath = global.RootPath+pathname;
         var extname = path.extname(pathname);
         extname = extname? extname.slice(1) : "unknown";
-
-        console.log("path=",realpath);
+        console.log("extname=",extname);
         fs.exists(realpath,function(exists){
-            console.log("exists=",exists);
             if(!exists){
                 response.writeHead(
                         404,
@@ -30,7 +27,6 @@ Route.prototype = {
                 response.end();
             }else{
                 fs.readFile(realpath,"binary",function(err,file){
-
                     if(err){
                         response.writeHead(
                             500,
@@ -38,7 +34,7 @@ Route.prototype = {
                         );
                         response.end(err);
                     }else{
-                        var contentType = mime[extanme] || "text/plain";
+                        var contentType = mime[extname] || "text/plain";
                         response.writeHead(
                             200,
                             {"Content-Type":contentType}

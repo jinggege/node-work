@@ -9,4 +9,3 @@ var app = http.createServer(route.onRequest);
 
 app.listen(appconfig.port);
 console.log("server start on "+appconfig.port);
-
