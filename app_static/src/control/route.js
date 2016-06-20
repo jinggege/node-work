@@ -6,70 +6,54 @@
 var url = require("url");
 var fs = require("fs");
 var path = require("path");
-var routes = require(global.RootPath+"/src/config/routeconfig.js");
+var mime = require(global.RootPath+"/src/config/mime.js").types;
 
 var Route = function(){};
 var routeCatch = {};
 
-
-
-
 Route.prototype = {
-
-
-	init:function () {
-
-		for(var ite in routes){
-			routeCatch.controlName = item.controlName;
-			routeCatch.instaince = require(global.RootPath+item.control_path);
-		};
-		
-	},
-
     onRequest:function(request,response){
-
         var pathname = url.parse(request.url).pathname;
         var realpath = global.RootPath+pathname;
-        console.log("pathname=",pathname);
+        var extname = path.extname(pathname);
+        extname = extname? extname.slice(1) : "unknown";
 
-        console.log(path);
-        return;
-
-        path.exists(realpath,function(exists){
+        console.log("path=",realpath);
+        fs.exists(realpath,function(exists){
+            console.log("exists=",exists);
             if(!exists){
-                response.wirteHead(
+                response.writeHead(
                         404,
                         {'Content-Type': 'text/plain'}
                     );
                 response.write("this request url:"+pathname+" not found!");
                 response.end();
-            }
+            }else{
+                fs.readFile(realpath,"binary",function(err,file){
 
+                    if(err){
+                        response.writeHead(
+                            500,
+                            {"Content-Type":"text/plain"}
+                        );
+                        response.end(err);
+                    }else{
+                        var contentType = mime[extanme] || "text/plain";
+                        response.writeHead(
+                            200,
+                            {"Content-Type":contentType}
+                        );
+                        response.write(file,"binary");
+                        response.end();
+                    }
+                });
+            }
 
         });
 
-
-
-        /*
-
-        if(routeCatch[pathname]){
-            
-
-        }else{
-            response.writeHead(
-                200
-            );
-            response.write(pathname);
-            response.end();
-        }
-        */
-
-
-        
-
     }
 
-}
+};
 
 
 

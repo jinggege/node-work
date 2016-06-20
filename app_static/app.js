@@ -3,9 +3,8 @@
  */
  global.RootPath = __dirname;
 var http = require("http");
-var appconfig = require(".src/config/appconfig.js");
+var appconfig = require("./src/config/appconfig.js");
 var route = require("./src/control/route.js");
-route.init();
 var app = http.createServer(route.onRequest);
 
 app.listen(appconfig.port);
