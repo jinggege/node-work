@@ -11,7 +11,7 @@ route.init();
 
 var app = http.createServer(route.onRequest);
 
-
 app.listen(8000);
+console.log("server start on "+8000);
 
 
